@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit a Planet</title>
+  </head>
+  <body>
+    <a href="/planets">Back to Planets</a>
+    <h1>Editting <%= planet.name %></h1>
+    
+    <form action="/planets/<%= planet._id %>?_method=PUT" method="POST">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name">
+        <label for="position">Number: </label>
+        <input type="number" name="position" id="position" min="1">
+        <label for="matter">Matter: </label>
+        <input type="text" name="matter" id="matter">
+      <button type="submit">Update Planet</button>
+    </form>
+  </body>
+</html>

@@ -3,24 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= planets.name %></title>
+    <title><%= planet.name %></title>
   </head>
   <body>
     <a href="/planets">View Another Planet</a>
     <a href="/">Home Page</a>
-    <h1> <%= planets.name %> </h1>
+    <h1> <%= planet.name %> </h1>
   
-    <% if(planets.position === 1) { %>
-      <p> Is the <%=planets.position %>st planet</p>
-      <% } else if(planets.position === 2) { %>
-        <p>Is the <%=planets.position %>nd planet</p>
-          <% } else if(planets.position === 3) { %>
-            <p>Is the <%=planets.position %>rd planet</p>
+    <% if(planet.position === 1) { %>
+      <p> Is the <%=planet.position %>st planet</p>
+      <% } else if(planet.position === 2) { %>
+        <p>Is the <%=planet.position %>nd planet</p>
+          <% } else if(planet.position === 3) { %>
+            <p>Is the <%=planet.position %>rd planet</p>
     <% } else { %>
-          <p>Is the <%=planets.position %>th planet</p>
+          <p>Is the <%=planet.position %>th planet</p>
     <% } %>
 
-    <p> It is a <%=planets.matter %></p>
+    <p> It is a <%=planet.matter %></p>
+    <a href="/planets/<%= planet._id %>/edit">Edit Planet</a>
 
+    <form action="/planets/<%= planet._id %>?_method=DELETE" method="POST"></form>
+      <button type="submit">Delete <%= planet.name %>?</button>
+    </form>
   </body>
 </html>

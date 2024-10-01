@@ -10,7 +10,9 @@
     <ul>
         <% planets.forEach((planet) => { %>
             <li>
-                <%= planet.name %> is made of <%= planet.matter %>. It is planet number <%= planet.position %> 
+                <a href="/planets/<%= planet._id %>">
+                    <%= planet.name %> is primarily made of <%= planet.matter %>s. It is planet number <%= planet.position %> 
+                </a>
             </li>
         <% }) %>
         <p>

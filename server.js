@@ -30,18 +30,34 @@ app.get("/planets/new", async (req, res) => { // NEW
 app.post("/planets", async (req,res) => { // CREATE
     await Planet.create(req.body)
     res.redirect("/planets");
-})
+});
 
 app.get("/planets", async (req,res) => { // INDEX
     const allPlanets = await Planet.find()
     res.render("planets/index.ejs", { planets: allPlanets })
-})
+});
 
 app.get("/planets/:planetId", async (req, res) => { // SHOW ONE
     const foundPlanet = await Planet.findById(req.params.planetId)
-    res.render("planets/show.ejs", { planets: foundPlanet })
+    res.render("planets/show.ejs", { planet: foundPlanet })
 });
+
+app.delete("/planets/:planetId", async (req, res) => {
+    await Planet.findByIdAndDelete(req.params.planetId)
+    res.redirect("/planets")
+});
+
+app.get("/planets/:planetId/edit", async (req, res) => { // EDIT PAGE
+    const foundPlanet = await Planet.findById(req.params.planetId)
+    res.render("planets/edit.ejs", { planet: foundPlanet })
+});
+
+app.put("/planets/:planetId", async (req, res) => { // EDIT MADE
+    await Planet.findByIdAndUpdate(req.params.planetId, req.body);
+    res.redirect(`/planets/${req.params.planetId}`)
+});
+
 
 app.listen(3000, () => {
     console.log("Listening to port 3000")
-})
+});
