@@ -2,22 +2,22 @@ const dotenv = require("dotenv")
 dotenv.config();
 
 const express = require("express");
-const app = express();
-
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 const methodOverride = require("method-override")
-const Planet = require("./model/planets.js");
 
-app.listen(3000, () => {
-    console.log("Listening to port 3000")
-})
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
 })
+
+const app = express();
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"));
+
+const Planet = require("./model/planets.js");
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 app.get("/", async (req, res) => { // HOME ROOT
     res.render("index.ejs")
@@ -29,10 +29,21 @@ app.get("/planets/new", async (req, res) => {
 
 app.post("/planets", async (req,res) => {
     await Planet.create(req.body)
-    res.redirect("/planets")
+    res.redirect("/planets");
 })
 
+app.get("/planets", async (req,res) => {
+    const allPlanets = await Planet.find()
+    res.render("planets/index.ejs", { planets: allPlanets })
+})
 // app.get("/planets", async (req, res) => { // planets LISTS
-//     const allplanets = await Planet.find();
-//     res.render("planets/index.ejs", { planets: allplanets })
+//     const allPlanets = await Planet.find();
+//     res.render("planets/index.ejs", { planets: allPlanets })
 // });
+
+
+
+
+app.listen(3000, () => {
+    console.log("Listening to port 3000")
+})
