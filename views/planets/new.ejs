@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Planet</title>
+</head>
+<body>
+    <h1> What is the Planet?</h1>
+    <form action="/planets" method="POST">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name">
+        <label for="position">Number: </label>
+        <input type="number" name="position" id="position" min="1" max="9">
+        <label for="matter">Matter: </label>
+        <input type="text" name="matter" id="matter">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
