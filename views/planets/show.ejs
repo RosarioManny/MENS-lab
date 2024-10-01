@@ -3,19 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= fruit.name %></title>
+    <title><%= planets.name %></title>
   </head>
   <body>
-    <a href="/fruits/">Back to Fruits</a>
-    <!-- <h1><%= fruit.name %></h1>
-    <% if (fruit.isReadyToEat) { %>
-      <p>This fruit is ready to eat!</p>
+    <a href="/planets">View Another Planet</a>
+    <a href="/">Home Page</a>
+    <h1> <%= planets.name %> </h1>
+  
+    <% if(planets.position === 1) { %>
+      <p> Is the <%=planets.position %>st planet</p>
+      <% } else if(planets.position === 2) { %>
+        <p>Is the <%=planets.position %>nd planet</p>
+          <% } else if(planets.position === 3) { %>
+            <p>Is the <%=planets.position %>rd planet</p>
     <% } else { %>
-      <p>This fruit is not ready to eat!</p>
+          <p>Is the <%=planets.position %>th planet</p>
     <% } %>
-    <form action="/fruits/<%= fruit._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete <%= fruit.name %></button>
-    </form>
-    <a href="/fruits/<%= fruit._id %>/edit">Edit <%= fruit.name %></a> -->
+
+    <p> It is a <%=planets.matter %></p>
+
   </body>
 </html>

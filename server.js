@@ -23,26 +23,24 @@ app.get("/", async (req, res) => { // HOME ROOT
     res.render("index.ejs")
 });
 
-app.get("/planets/new", async (req, res) => {
+app.get("/planets/new", async (req, res) => { // NEW 
     res.render("planets/new.ejs")
 });
 
-app.post("/planets", async (req,res) => {
+app.post("/planets", async (req,res) => { // CREATE
     await Planet.create(req.body)
     res.redirect("/planets");
 })
 
-app.get("/planets", async (req,res) => {
+app.get("/planets", async (req,res) => { // INDEX
     const allPlanets = await Planet.find()
     res.render("planets/index.ejs", { planets: allPlanets })
 })
-// app.get("/planets", async (req, res) => { // planets LISTS
-//     const allPlanets = await Planet.find();
-//     res.render("planets/index.ejs", { planets: allPlanets })
-// });
 
-
-
+app.get("/planets/:planetId", async (req, res) => { // SHOW ONE
+    const foundPlanet = await Planet.findById(req.params.planetId)
+    res.render("planets/show.ejs", { planets: foundPlanet })
+});
 
 app.listen(3000, () => {
     console.log("Listening to port 3000")
