@@ -23,7 +23,7 @@
     <p> It is a <%=planet.matter %></p>
     <a href="/planets/<%= planet._id %>/edit">Edit Planet</a>
 
-    <form action="/planets/<%= planet._id %>?_method=DELETE" method="POST"></form>
+    <form action="/planets/<%= planet._id %>?_method=DELETE" method="POST">
       <button type="submit">Delete <%= planet.name %>?</button>
     </form>
   </body>
